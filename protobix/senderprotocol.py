@@ -106,7 +106,7 @@ class SenderProtocol(object):
             if not self.dryrun:
                 zbx_answer = self.send_to_zabbix(data)
                 regex = re.match( ZBX_RESP_REGEX, zbx_answer.get('info'))
-                result = regex.group(1)
+                result = "PROCESSED" if regex.group(1) == '1' else "FAILED"
 
             if self.debug:
                 print (ZBX_DBG_SEND_RESULT % (result,
